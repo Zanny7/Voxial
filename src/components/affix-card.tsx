@@ -30,6 +30,11 @@ const typeLabels: Record<Affix["type"], string> = {
   both: "Both",
 };
 
+const originLabels: Record<Affix["origin"], string> = {
+  greek: "Greek",
+  latin: "Latin",
+};
+
 type AffixCardProps = {
   affix: Affix;
 };
@@ -57,7 +62,7 @@ export function AffixCard({ affix }: AffixCardProps) {
         </div>
       </CardHeader>
       <CardContent className="flex flex-wrap gap-2 text-sm">
-        <Badge variant="outline">{affix.origin}</Badge>
+        <Badge variant="outline">{originLabels[affix.origin]}</Badge>
         <Badge variant="outline">{affix.type}</Badge>
       </CardContent>
       <CardFooter className="flex justify-between gap-2">
@@ -90,10 +95,10 @@ export function AffixCard({ affix }: AffixCardProps) {
           <DialogContent>
             <DialogHeader>
               <DialogTitle className="font-serif text-2xl">
-                {affix.displayText} examples
+                {affix.displayText} example
               </DialogTitle>
               <DialogDescription>
-                A word built with this {affix.origin}{" "}
+                A word built with this {originLabels[affix.origin]}{" "}
                 {typeLabels[affix.type].toLowerCase()}.
               </DialogDescription>
             </DialogHeader>
@@ -103,8 +108,14 @@ export function AffixCard({ affix }: AffixCardProps) {
                   key={example.word}
                   className="rounded-md border bg-card/80 p-4"
                 >
-                  <p className="font-serif text-xl font-semibold">
+                  <p className="text-xs font-semibold uppercase tracking-[0.24em] text-muted-foreground">
+                    Example word
+                  </p>
+                  <p className="mt-2 font-serif text-2xl font-semibold">
                     {example.word}
+                  </p>
+                  <p className="mt-3 text-xs font-semibold uppercase tracking-[0.24em] text-muted-foreground">
+                    Why it fits
                   </p>
                   <p className="mt-1 text-sm leading-6 text-muted-foreground">
                     {example.explanation}
