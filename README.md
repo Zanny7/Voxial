@@ -33,6 +33,8 @@ npm run dev
 npm run build
 npm run start
 npm run lint
+npm run validate:data
+npm test
 npm run format
 npm run format:check
 ```
@@ -58,6 +60,12 @@ Affix data starts as local TypeScript records. Each affix should include:
 
 The local data shape should stay easy to replace later with an API, database,
 or account-backed source.
+
+Validate the local dataset with:
+
+```bash
+npm run validate:data
+```
 
 ## Linear Workflow
 

@@ -58,5 +58,6 @@ Before marking an issue complete, run the relevant checks. At minimum:
 ```bash
 npm run format:check
 npm run lint
+npm run validate:data
 npm run build
 ```
