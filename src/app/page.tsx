@@ -1,65 +1,104 @@
-import Image from "next/image";
+import Link from "next/link";
+import { ArrowRight, Heart, Landmark, ScrollText } from "lucide-react";
+
+import { Button } from "@/components/ui/button";
+import {
+  Card,
+  CardContent,
+  CardDescription,
+  CardHeader,
+  CardTitle,
+} from "@/components/ui/card";
+
+const sections = [
+  {
+    href: "/greek",
+    title: "Greek Affixes",
+    description: "Roots and endings for study, sound, time, blood, and form.",
+    icon: Landmark,
+  },
+  {
+    href: "/latin",
+    title: "Latin Affixes",
+    description: "Common parts for movement, shape, capability, and relation.",
+    icon: ScrollText,
+  },
+  {
+    href: "/favorites",
+    title: "Favorites",
+    description: "A saved shelf for affixes worth revisiting.",
+    icon: Heart,
+  },
+];
 
 export default function Home() {
   return (
-    <div className="flex flex-col flex-1 items-center justify-center bg-zinc-50 font-sans dark:bg-black">
-      <main className="flex flex-1 w-full max-w-3xl flex-col items-center justify-between py-32 px-16 bg-white dark:bg-black sm:items-start">
-        <Image
-          className="dark:invert"
-          src="/next.svg"
-          alt="Next.js logo"
-          width={100}
-          height={20}
-          priority
-        />
-        <div className="flex flex-col items-center gap-6 text-center sm:items-start sm:text-left">
-          <h1 className="max-w-xs text-3xl font-semibold leading-10 tracking-tight text-black dark:text-zinc-50">
-            To get started, edit the page.tsx file.
-          </h1>
-          <p className="max-w-md text-lg leading-8 text-zinc-600 dark:text-zinc-400">
-            Looking for a starting point or more instructions? Head over to{" "}
-            <a
-              href="https://vercel.com/templates?framework=next.js&utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-              className="font-medium text-zinc-950 dark:text-zinc-50"
-            >
-              Templates
-            </a>{" "}
-            or the{" "}
-            <a
-              href="https://nextjs.org/learn?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-              className="font-medium text-zinc-950 dark:text-zinc-50"
-            >
-              Learning
-            </a>{" "}
-            center.
+    <div className="mx-auto flex w-full max-w-6xl flex-col gap-10 px-4 py-10 sm:px-6 lg:py-14">
+      <section className="grid gap-8 lg:grid-cols-[1.05fr_0.95fr] lg:items-end">
+        <div className="space-y-6">
+          <p className="text-sm font-semibold uppercase tracking-[0.32em] text-accent-foreground">
+            Classical word study
+          </p>
+          <div className="space-y-4">
+            <h1 className="font-serif text-5xl font-semibold leading-tight text-foreground sm:text-6xl">
+              Read unfamiliar words by their oldest parts.
+            </h1>
+            <p className="max-w-2xl text-lg leading-8 text-muted-foreground">
+              Browse Greek and Latin affixes, see their hyphen notation, and
+              collect the ones you want to remember.
+            </p>
+          </div>
+          <div className="flex flex-col gap-3 sm:flex-row">
+            <Button asChild size="lg">
+              <Link href="/greek">
+                Start with Greek
+                <ArrowRight className="size-4" aria-hidden="true" />
+              </Link>
+            </Button>
+            <Button asChild variant="outline" size="lg">
+              <Link href="/latin">Open Latin</Link>
+            </Button>
+          </div>
+        </div>
+        <div className="border-y border-border/70 py-6 lg:border-l lg:border-y-0 lg:pl-8">
+          <p className="font-serif text-3xl leading-snug text-foreground">
+            hemo- · -logy · -form-
+          </p>
+          <p className="mt-3 text-sm leading-6 text-muted-foreground">
+            Prefixes appear with a trailing hyphen, suffixes with a leading
+            hyphen, and forms that can work both ways with hyphens on both
+            sides.
           </p>
         </div>
-        <div className="flex flex-col gap-4 text-base font-medium sm:flex-row">
-          <a
-            className="flex h-12 w-full items-center justify-center gap-2 rounded-full bg-foreground px-5 text-background transition-colors hover:bg-[#383838] dark:hover:bg-[#ccc] md:w-[158px]"
-            href="https://vercel.com/new?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            <Image
-              className="dark:invert"
-              src="/vercel.svg"
-              alt="Vercel logomark"
-              width={16}
-              height={16}
-            />
-            Deploy Now
-          </a>
-          <a
-            className="flex h-12 w-full items-center justify-center rounded-full border border-solid border-black/[.08] px-5 transition-colors hover:border-transparent hover:bg-black/[.04] dark:border-white/[.145] dark:hover:bg-[#1a1a1a] md:w-[158px]"
-            href="https://nextjs.org/docs?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            Documentation
-          </a>
-        </div>
-      </main>
+      </section>
+
+      <section className="grid gap-4 md:grid-cols-3">
+        {sections.map((section) => {
+          const Icon = section.icon;
+
+          return (
+            <Card key={section.href} className="bg-card/85">
+              <CardHeader>
+                <div className="mb-2 flex size-10 items-center justify-center rounded-md bg-secondary text-secondary-foreground">
+                  <Icon className="size-5" aria-hidden="true" />
+                </div>
+                <CardTitle className="font-serif text-2xl">
+                  {section.title}
+                </CardTitle>
+                <CardDescription>{section.description}</CardDescription>
+              </CardHeader>
+              <CardContent>
+                <Button asChild variant="ghost" className="px-0">
+                  <Link href={section.href}>
+                    Open section
+                    <ArrowRight className="size-4" aria-hidden="true" />
+                  </Link>
+                </Button>
+              </CardContent>
+            </Card>
+          );
+        })}
+      </section>
     </div>
   );
 }
