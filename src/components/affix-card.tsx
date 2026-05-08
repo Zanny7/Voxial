@@ -20,7 +20,9 @@ import {
   DialogTitle,
   DialogTrigger,
 } from "@/components/ui/dialog";
+import { useFavorites } from "@/components/favorites-provider";
 import type { Affix } from "@/data/affixes";
+import { cn } from "@/lib/utils";
 
 const typeLabels: Record<Affix["type"], string> = {
   prefix: "Prefix",
@@ -33,6 +35,9 @@ type AffixCardProps = {
 };
 
 export function AffixCard({ affix }: AffixCardProps) {
+  const { hydrated, isFavorite, toggleFavorite } = useFavorites();
+  const saved = isFavorite(affix.id);
+
   return (
     <Card className="bg-card/88">
       <CardHeader className="gap-4">
@@ -57,12 +62,18 @@ export function AffixCard({ affix }: AffixCardProps) {
       <CardFooter className="flex justify-between gap-2">
         <Button
           type="button"
-          variant="outline"
+          variant={saved ? "default" : "outline"}
           size="sm"
-          aria-label={`Favorite ${affix.displayText}`}
+          aria-label={`${saved ? "Remove" : "Favorite"} ${affix.displayText}`}
+          aria-pressed={saved}
+          disabled={!hydrated}
+          onClick={() => toggleFavorite(affix.id)}
         >
-          <Star className="size-4" aria-hidden="true" />
-          Favorite
+          <Star
+            className={cn("size-4", saved && "fill-current")}
+            aria-hidden="true"
+          />
+          {saved ? "Saved" : "Favorite"}
         </Button>
         <Dialog>
           <DialogTrigger asChild>
