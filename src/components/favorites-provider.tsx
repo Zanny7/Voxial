@@ -22,6 +22,7 @@ type FavoritesContextValue = {
 };
 
 const FavoritesContext = createContext<FavoritesContextValue | null>(null);
+const emptyFavoriteIds: string[] = [];
 
 function subscribeToHydration() {
   return () => {};
@@ -31,7 +32,7 @@ export function FavoritesProvider({ children }: { children: React.ReactNode }) {
   const favoriteIds = useSyncExternalStore(
     subscribeToFavoriteIds,
     readFavoriteIds,
-    () => [],
+    () => emptyFavoriteIds,
   );
   const hydrated = useSyncExternalStore(
     subscribeToHydration,
