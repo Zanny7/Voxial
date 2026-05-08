@@ -1,16 +1,32 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# Voxial
 
-## Getting Started
+Voxial is an educational web app for common Greek and Latin affixes:
+prefixes, suffixes, and affixes that can appear in both positions.
 
-First, run the development server:
+The first version uses local static data and client-side persistence so the
+app stays simple while the product shape is established.
+
+## Tech Stack
+
+- Next.js App Router
+- React
+- TypeScript
+- Tailwind CSS
+- shadcn/ui
+- npm
+- ESLint
+- Prettier
+
+## Setup
 
 ```bash
+npm install
 npm run dev
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+Open `http://localhost:3000`.
 
-## Scripts
+## Commands
 
 ```bash
 npm run dev
@@ -21,21 +37,50 @@ npm run format
 npm run format:check
 ```
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+## Current Structure
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+- `src/app` contains App Router routes and global styles.
+- `src/components/ui` contains shadcn/ui primitives.
+- `src/lib` contains shared utilities.
+- `src/data/affixes.ts` will contain the local typed affix dataset.
 
-## Learn More
+## Data Model
 
-To learn more about Next.js, take a look at the following resources:
+Affix data starts as local TypeScript records. Each affix should include:
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+- `id`
+- `text`
+- `displayText`
+- `origin`: `Greek` or `Latin`
+- `type`: `prefix`, `suffix`, or `both`
+- `meaning`
+- `examples`: exactly three entries with `word` and `explanation`
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+The local data shape should stay easy to replace later with an API, database,
+or account-backed source.
 
-## Deploy on Vercel
+## Linear Workflow
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+Voxial uses a Linear-first workflow. Work must happen from Linear issues in the
+`Voxial` project and `Voxial` team.
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+- Work one issue at a time.
+- Move the active issue to `In Progress`.
+- Reference the Linear issue in commits and summaries where practical.
+- After finishing an issue, update Linear with files changed, behavior added,
+  commands run, how to test, and follow-up issues.
+
+## GitHub Workflow
+
+The only GitHub repository in scope is `https://github.com/Zanny7/Voxial.git`.
+
+Use `dev` as the working branch for now. Promote from `dev` to `main` only at
+explicit checkpoints.
+
+Before changing files, confirm:
+
+```bash
+git remote -v
+git branch --show-current
+git status --short --branch
+```
