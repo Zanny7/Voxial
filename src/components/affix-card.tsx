@@ -1,3 +1,5 @@
+"use client";
+
 import { CircleHelp, Star } from "lucide-react";
 
 import { Badge } from "@/components/ui/badge";
@@ -9,6 +11,15 @@ import {
   CardHeader,
   CardTitle,
 } from "@/components/ui/card";
+import {
+  Dialog,
+  DialogContent,
+  DialogDescription,
+  DialogFooter,
+  DialogHeader,
+  DialogTitle,
+  DialogTrigger,
+} from "@/components/ui/dialog";
 import type { Affix } from "@/data/affixes";
 
 const typeLabels: Record<Affix["type"], string> = {
@@ -53,14 +64,45 @@ export function AffixCard({ affix }: AffixCardProps) {
           <Star className="size-4" aria-hidden="true" />
           Favorite
         </Button>
-        <Button
-          type="button"
-          variant="ghost"
-          size="icon-sm"
-          aria-label={`Show examples for ${affix.displayText}`}
-        >
-          <CircleHelp className="size-4" aria-hidden="true" />
-        </Button>
+        <Dialog>
+          <DialogTrigger asChild>
+            <Button
+              type="button"
+              variant="ghost"
+              size="icon-sm"
+              aria-label={`Show examples for ${affix.displayText}`}
+            >
+              <CircleHelp className="size-4" aria-hidden="true" />
+            </Button>
+          </DialogTrigger>
+          <DialogContent>
+            <DialogHeader>
+              <DialogTitle className="font-serif text-2xl">
+                {affix.displayText} examples
+              </DialogTitle>
+              <DialogDescription>
+                Three common words built with this {affix.origin}{" "}
+                {typeLabels[affix.type].toLowerCase()}.
+              </DialogDescription>
+            </DialogHeader>
+            <div className="grid gap-3">
+              {affix.examples.map((example) => (
+                <div
+                  key={example.word}
+                  className="rounded-md border bg-card/80 p-4"
+                >
+                  <p className="font-serif text-xl font-semibold">
+                    {example.word}
+                  </p>
+                  <p className="mt-1 text-sm leading-6 text-muted-foreground">
+                    {example.explanation}
+                  </p>
+                </div>
+              ))}
+            </div>
+            <DialogFooter showCloseButton />
+          </DialogContent>
+        </Dialog>
       </CardFooter>
     </Card>
   );
