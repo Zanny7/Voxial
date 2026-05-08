@@ -67,6 +67,10 @@ Validate the local dataset with:
 npm run validate:data
 ```
 
+The validation checks required fields, allowed origin/type values, one example
+word and explanation per affix, and hyphen notation for prefix, suffix, and
+both-type display text.
+
 ## Linear Workflow
 
 Voxial uses a Linear-first workflow. Work must happen from Linear issues in the
