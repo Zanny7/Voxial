@@ -1,6 +1,6 @@
 import { affixes, type AffixOrigin, type AffixType } from "../src/data/affixes";
 
-const allowedOrigins = new Set<AffixOrigin>(["Greek", "Latin"]);
+const allowedOrigins = new Set<AffixOrigin>(["greek", "latin"]);
 const allowedTypes = new Set<AffixType>(["prefix", "suffix", "both"]);
 
 const errors: string[] = [];
@@ -33,24 +33,16 @@ for (const affix of affixes) {
     errors.push(`${affix.id}: invalid type "${affix.type}".`);
   }
 
-  if (!affix.meaning.trim()) {
-    errors.push(`${affix.id}: meaning must not be empty.`);
+  if (!affix.shortDescription.trim()) {
+    errors.push(`${affix.id}: shortDescription must not be empty.`);
   }
 
-  if (affix.examples.length !== 3) {
-    errors.push(`${affix.id}: expected exactly 3 examples.`);
+  if (!affix.example.word.trim()) {
+    errors.push(`${affix.id}: example word must not be empty.`);
   }
 
-  for (const [index, example] of affix.examples.entries()) {
-    if (!example.word.trim()) {
-      errors.push(`${affix.id}: example ${index + 1} word must not be empty.`);
-    }
-
-    if (!example.explanation.trim()) {
-      errors.push(
-        `${affix.id}: example ${index + 1} explanation must not be empty.`,
-      );
-    }
+  if (!affix.example.explanation.trim()) {
+    errors.push(`${affix.id}: example explanation must not be empty.`);
   }
 }
 

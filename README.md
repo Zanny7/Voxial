@@ -53,10 +53,10 @@ Affix data starts as local TypeScript records. Each affix should include:
 - `id`
 - `text`
 - `displayText`
-- `origin`: `Greek` or `Latin`
+- `origin`: `greek` or `latin`
 - `type`: `prefix`, `suffix`, or `both`
-- `meaning`
-- `examples`: exactly three entries with `word` and `explanation`
+- `shortDescription`
+- `example`: one entry with `word` and `explanation`
 
 The local data shape should stay easy to replace later with an API, database,
 or account-backed source.

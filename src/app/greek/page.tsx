@@ -2,7 +2,7 @@ import { AffixCard } from "@/components/affix-card";
 import { getAffixesByOrigin } from "@/data/affixes";
 
 export default function GreekAffixesPage() {
-  const greekAffixes = getAffixesByOrigin("Greek");
+  const greekAffixes = getAffixesByOrigin("greek");
 
   return (
     <div className="mx-auto flex w-full max-w-6xl flex-col gap-8 px-4 py-10 sm:px-6 lg:py-14">

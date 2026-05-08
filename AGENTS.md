@@ -39,8 +39,8 @@ favorites.
 ## Data Conventions
 
 - Affix records belong in `src/data/affixes.ts`.
-- Each affix must have exactly three examples.
-- Use `Greek` or `Latin` for origin.
+- Each affix must have one example object.
+- Use `greek` or `latin` for origin.
 - Use `prefix`, `suffix`, or `both` for type.
 - Display hyphen notation clearly, such as `hemo-`, `-logy`, or `-form-`.
 

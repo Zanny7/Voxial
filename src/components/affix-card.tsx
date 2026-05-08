@@ -21,7 +21,7 @@ import {
   DialogTrigger,
 } from "@/components/ui/dialog";
 import { useFavorites } from "@/components/favorites-provider";
-import type { Affix } from "@/data/affixes";
+import { getAffixExamples, type Affix } from "@/data/affixes";
 import { cn } from "@/lib/utils";
 
 const typeLabels: Record<Affix["type"], string> = {
@@ -37,6 +37,7 @@ type AffixCardProps = {
 export function AffixCard({ affix }: AffixCardProps) {
   const { hydrated, isFavorite, toggleFavorite } = useFavorites();
   const saved = isFavorite(affix.id);
+  const examples = getAffixExamples(affix);
 
   return (
     <Card className="bg-card/88">
@@ -47,7 +48,7 @@ export function AffixCard({ affix }: AffixCardProps) {
               {affix.displayText}
             </CardTitle>
             <p className="mt-2 text-sm text-muted-foreground">
-              {affix.meaning}
+              {affix.shortDescription}
             </p>
           </div>
           <Badge variant="secondary" className="shrink-0">
@@ -92,12 +93,12 @@ export function AffixCard({ affix }: AffixCardProps) {
                 {affix.displayText} examples
               </DialogTitle>
               <DialogDescription>
-                Three common words built with this {affix.origin}{" "}
+                A word built with this {affix.origin}{" "}
                 {typeLabels[affix.type].toLowerCase()}.
               </DialogDescription>
             </DialogHeader>
             <div className="grid gap-3">
-              {affix.examples.map((example) => (
+              {examples.map((example) => (
                 <div
                   key={example.word}
                   className="rounded-md border bg-card/80 p-4"
