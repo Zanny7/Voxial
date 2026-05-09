@@ -1,4 +1,5 @@
 import { AffixCard } from "@/components/affix-card";
+import { HowToUseVoxial } from "@/components/how-to-use-voxial";
 import { getAffixesByOrigin } from "@/data/affixes";
 
 export default function LatinAffixesPage() {
@@ -18,6 +19,8 @@ export default function LatinAffixesPage() {
           English vocabulary.
         </p>
       </section>
+
+      <HowToUseVoxial />
 
       {latinAffixes.length > 0 ? (
         <section

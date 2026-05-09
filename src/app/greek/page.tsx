@@ -1,4 +1,5 @@
 import { AffixCard } from "@/components/affix-card";
+import { HowToUseVoxial } from "@/components/how-to-use-voxial";
 import { getAffixesByOrigin } from "@/data/affixes";
 
 export default function GreekAffixesPage() {
@@ -18,6 +19,8 @@ export default function GreekAffixesPage() {
           science, medicine, language, and scholarship.
         </p>
       </section>
+
+      <HowToUseVoxial />
 
       {greekAffixes.length > 0 ? (
         <section
